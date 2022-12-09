@@ -4,8 +4,14 @@ import axios from "axios";
 
 export class Read extends React.Component{
     
+    constructor(){
+        super();
+        //bind to componentdidmound unstead of creating a second function that performs the same function
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
 
     componentDidMount() {
+        //goes off asynch to server
         axios.get('http://localhost:4000/api/books')
         .then((response)=>{
             this.setState({books:response.data})
@@ -23,7 +29,7 @@ export class Read extends React.Component{
         return(
             <div>
                 <h3>Hello from my Read component!</h3>
-                <Books books={this.state.books}></Books>
+                <Books books={this.state.books} Reload ={this.componentDidMount}></Books>
             </div>
         );
     }

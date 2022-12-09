@@ -70,6 +70,16 @@ app.put('/api/book/:id', (req, res)=>{
     })
 })
 
+app.delete('/api/book/:id',(req,res)=>{
+  console.log("deleteing: "+req.params.id);
+
+  //finds the document by its id and deletes it 
+  bookModel.findByIdAndDelete({_id:req.params.id},(error,data)=>{
+    //use call back function to send back infor after deletion
+    res.send(data);
+  })
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
